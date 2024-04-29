@@ -5,7 +5,7 @@ on:
   workflow_dispatch:
   push:
     branches:
-      - branch-2
+      - new-branch
 
 
   contents: write
@@ -32,4 +32,4 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           from_step: 2
           to_step: 3
-          branch_name: branch-2
+          branch_name: new-branch
