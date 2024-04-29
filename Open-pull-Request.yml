@@ -1,0 +1,43 @@
+
+name: Step 3, Open a pull request
+
+# This step is to open a pull request with branch `branch-2`
+
+on:
+  workflow_dispatch:
+  pull_request:
+    types:
+      - opened
+      - reopened
+
+
+permissions:
+  
+  contents: write
+
+jobs:
+  on_open_a_pull_request:
+    name: On open a pull request
+
+  
+    if: ${{ !github.event.repository.is_template && github.head_ref == 'branch-2' }}
+
+   
+    runs-on: ubuntu-latest
+
+    steps:
+      # check out the repository to edit the README
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0 # Let's get all the branches
+          ref: branch-2 
+          
+      # Update README 
+      - name: Update to step 4
+        uses: skills/action-update-step@v1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          from_step: 3
+          to_step: 4
+          branch_name: branch-2
