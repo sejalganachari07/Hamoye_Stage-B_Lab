@@ -1,7 +1,7 @@
 
 name: Step 3, Open a pull request
 
-# This step is to open a pull request with branch `branch-2`
+# This step is to open a pull request with branch `new-branch`
 
 on:
   workflow_dispatch:
@@ -20,7 +20,7 @@ jobs:
     name: On open a pull request
 
   
-    if: ${{ !github.event.repository.is_template && github.head_ref == 'branch-2' }}
+    if: ${{ !github.event.repository.is_template && github.head_ref == 'new-branch' }}
 
    
     runs-on: ubuntu-latest
@@ -31,7 +31,7 @@ jobs:
         uses: actions/checkout@v2
         with:
           fetch-depth: 0 # Let's get all the branches
-          ref: branch-2 
+          ref: new-branch
           
       # Update README 
       - name: Update to step 4
@@ -40,4 +40,4 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           from_step: 3
           to_step: 4
-          branch_name: branch-2
+          branch_name: new-branch
